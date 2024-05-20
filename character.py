@@ -48,7 +48,7 @@ class Hero(characters):
             self.health += self.healList[choice].heal
             self.health = max(self.health, 0)
             self.healList[choice].amount -= 1
-            print(f"{self.name} used a {self.healList[choice].name} and recovered {self.healList[choice].heal} health. \n {self.name} now has {self.health} health.")
+            print(f"{self.name} used a {self.healList[choice].name} and recovered {self.healList[choice].heal} health. \n{self.name} now has {self.health} health.")
         else:
             print(f"{self.name} has no more {self.healList[choice].name}")
     
@@ -57,6 +57,6 @@ class Hero(characters):
             if self.itemsList[choice].name == "Dragon Killer":
                 if monster.name == "Dragon":
                     monster.health = 0
-                    print("The Dragon Killer obliterates the Dragon")
+                    print("The Dragon Killer obliterates the Dragon (cheater)")
                 else:
                     print("Item has no effect")

@@ -26,7 +26,7 @@ while not gameLoop:
 
     while not battleLoop:
         if not Game.Monster_defeated >= 3:
-            Game.Encounter(monsterList[0],player)
+            Game.Encounter(random.choice(monsterList),player)
             input()
         else:
             battleLoop = True
