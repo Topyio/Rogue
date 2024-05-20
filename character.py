@@ -1,7 +1,6 @@
 from weapons import Fist
 from spells import spellList
-from items import itemsList
-
+from items import itemsList,healItemslist
 elementTable = {
     "Water" : "Fire",
     "Fire"  : "Moss",
@@ -17,15 +16,13 @@ class characters:
         self.max_health = health
         self.weapon = Fist
         self.spellList = spellList
-        self.healItem = itemsList[0]
+        self.itemsList = itemsList
+        self.healList = healItemslist
 
 class Hero(characters):
     def __init__(self, name: str,
                  health: int = 10) -> None:
         super().__init__(name, health)
-
-        self.default_spell = self.spellList[0]
-        self.default_healItem = self.healItem
         self.superEffective = False
         self.uneffective = False
 
@@ -46,11 +43,20 @@ class Hero(characters):
             self.uneffective = True
             monster.health = max(monster.health, 0)
 
-    def use_heal_item(self):
-        if self.healItem.amount > 0:
-            self.health += self.healItem.heal
+    def use_heal_item(self, choice: int):
+        if self.healList[choice].amount > 0:
+            self.health += self.healList[choice].heal
             self.health = max(self.health, 0)
-            self.healItem.amount -= 1
-            print(f"{self.name} used a {self.healItem.name} and recovered {self.healItem.heal} health. \n {self.name} now has {self.health} health.")
+            self.healList[choice].amount -= 1
+            print(f"{self.name} used a {self.healList[choice].name} and recovered {self.healList[choice].heal} health. \n {self.name} now has {self.health} health.")
         else:
-            print(f"{self.name} has no more {self.healItem.name}")
+            print(f"{self.name} has no more {self.healList[choice].name}")
+    
+    def use_item(self, choice: int, monster):
+        if self.itemsList[choice].amount > 0:
+            if self.itemsList[choice].name == "Dragon Killer":
+                if monster.name == "Dragon":
+                    monster.health = 0
+                    print("The Dragon Killer obliterates the Dragon")
+                else:
+                    print("Item has no effect")

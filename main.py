@@ -31,7 +31,7 @@ while not gameLoop:
         else:
             battleLoop = True
     
-    print(f"{player.name} has killed 10 monsters. \nYou now approach the scourge of the dungeon.")
+    print(f"{player.name} has killed {Game.Monster_defeated} monsters. \nYou now approach the scourge of the dungeon.")
     input()
     os.system("cls")
     print("Prepare yourself.")
